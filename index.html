@@ -166,14 +166,18 @@
     </div>
 
     <script>
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand();
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
 
-        function orderItem(title, price) {
-            // Передаем выбранный товар в Telegram-бота
-            tg.sendData(JSON.stringify({ item: title, price: price }));
-        }
-    </script>
-</body>
-</html>
+    function orderItem(title, price) {
+        // Формируем строку данных
+        const payload = JSON.stringify({ item: title, price: price });
+        
+        // Отправляем данные боту
+        tg.sendData(payload);
+        
+        // Принудительно закрываем шторку Web App
+        tg.close();
+    }
+</script>
